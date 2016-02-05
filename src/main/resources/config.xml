@@ -1,0 +1,27 @@
+<?xml version='1.0'?>
+<configuration>
+    <settings>
+        <botNick>IVBot</botNick>
+        <nsPassword></nsPassword>
+        <version>2.0</version>
+        <ownerNick>oCom</ownerNick>
+        <debug>true</debug>
+        <login>BotsyDo</login>
+        <servers>
+            <server>fluffypony.nl.eu.synirc.net</server>
+        </servers>
+        <channels>
+            <debug>
+                <channel>#testingthings</channel>
+            </debug>
+            <release>
+                <channel>#smogonwifi</channel>
+            </release>
+        </channels>
+        <trigger>?</trigger>
+        <accessLevels>
+            <owner nick="oCom"/>
+            <trusted nick="flarg"/>
+        </accessLevels>
+    </settings>
+</configuration>

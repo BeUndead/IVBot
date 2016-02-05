@@ -1,0 +1,7 @@
+<configuration>
+    <connection>
+        <url>jdbc:sqlite:src/main/resources/db/pokedb.sqlite</url>
+        <user></user>
+        <password></password>
+    </connection>
+</configuration>
