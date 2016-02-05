@@ -23,7 +23,7 @@ public class IVBot implements Runnable {
         ConfigurationBuilder configurationBuilder = new ConfigurationBuilder(builder.getIVBotConfiguration());
         Configuration configuration = configurationBuilder.getConfiguration();
 
-        PircBotX ivBot = new PircBotX(configurationBuilder.getConfiguration());
+        PircBotX ivBot = new PircBotX(configuration);
 
         // attempt to start the {@code IVBot}
         try {

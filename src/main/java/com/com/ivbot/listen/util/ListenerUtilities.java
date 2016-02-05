@@ -6,28 +6,23 @@ import com.google.common.collect.ImmutableSet;
 import org.pircbotx.Configuration;
 import org.pircbotx.hooks.Listener;
 import org.pircbotx.hooks.managers.ListenerManager;
+import org.reflections.Reflections;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Static settings used across (most, if not) all commands.
  */
 public class ListenerUtilities {
 
-    /**
-     * The folder containing the (compiled) {@code Command}'s class files.
-     */
-    private static final File commandsDirectory = new File("./out/production/ivbot2/com/com/ivbot/listen/");
+    private static final Reflections reflections = new Reflections();
     /**
      * The prefix for {@code Class} {@code Object}s in the designated {@code commandsDirectory}.
      */
-    private static final String commandsDirectoryClassPrefix = "com.com.ivbot.listen.";
-    /**
-     * The {@code File} extension for {@code Class} {@code Objects}.
-     */
-    private static final String classPostfix = ".class";
+    private static final String commandsPackage = "com.com.ivbot.listen.";
+
     /**
      * The {@link String} to proceed any messages to trigger a reaction from the bot.  Can be configured in the {@code
      * config.xml} {@code File} used in {@link com.com.ivbot.launch.config.IVBotConfigurationBuilder}.
@@ -53,41 +48,27 @@ public class ListenerUtilities {
         }
     }
 
+    /**
+     * Retrieves a {@link List} of all {@link IVBotCommand IVBotCommands} registered.
+     *
+     * @return The {@code List} of {@code IVBotCommands}.
+     */
     public static List<Listener> getAllListeners() {
         List<Listener> listeners = new ArrayList<>();
-        // Scan through all the Files in the directory
-        File[] filesInDirectory = commandsDirectory.listFiles();
-        if (filesInDirectory == null || filesInDirectory.length == 0) {
-            return listeners;
-        }
-        for (File file : commandsDirectory.listFiles()) {
-            if (file == null) {
+
+        Set<Class<? extends CommandListener>> commandClasses = reflections.getSubTypesOf(CommandListener.class);
+
+        for (Class<? extends CommandListener> commandClass : commandClasses) {
+            if (!commandClass.isAnnotationPresent(IVBotCommand.class)) {
                 continue;
             }
-            if (file.isDirectory()) {
-                continue;
-            }
-            String fileName = file.getName();
-            if (!fileName.endsWith(classPostfix)) {
-                continue;
-            }
-            fileName = fileName.substring(0, fileName.length() - classPostfix.length());
-            fileName = commandsDirectoryClassPrefix + fileName;
             try {
-                Class commandClass = Class.forName(fileName);
-                if (commandClass.isAnnotationPresent(IVBotCommand.class)) {
-                    // If they have the IVBotCommand annotation, then add it
-                    CommandListener listener = (CommandListener) commandClass.newInstance();
-                    listeners.add(listener);
-                }
-            } catch (ClassNotFoundException e) {
-                System.err.format("Could not find class for %s%n", fileName);
-            } catch (InstantiationException e) {
-                System.err.format("Could not instance %s%n", fileName);
-            } catch (IllegalAccessException e) {
-                System.err.format("Illegal access at %s%n", fileName);
+                listeners.add(commandClass.newInstance());
+            } catch (InstantiationException | IllegalAccessException ex) {
+                ex.printStackTrace();
             }
         }
+
         return listeners;
     }
 

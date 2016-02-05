@@ -19,7 +19,9 @@ dependencies {
     compile group: 'org.pircbotx', name: 'pircbotx', version: '2.1'
     compile group: 'org.jooq', name: 'jooq', version: '+'
     compile 'commons-logging:commons-logging:1.2'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'
     compile 'commons-beanutils:commons-beanutils:1.9+'
+    compile group: 'org.reflections', name: 'reflections', version: '+'
     compile fileTree(dir: 'libs', include: ['*.jar']) // Fixme - When common-configuration2 pushes to maven
     testCompile group: 'junit', name: 'junit', version: '+'
     testCompile group: 'org.mockito', name: 'mockito-all', version: '+'
