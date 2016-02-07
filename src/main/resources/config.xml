@@ -5,7 +5,7 @@
         <nsPassword></nsPassword>
         <version>2.0</version>
         <ownerNick>oCom</ownerNick>
-        <debug>false</debug>
+        <debug>true</debug>
         <login>BotsyDo</login>
         <servers>
             <server>fluffypony.nl.eu.synirc.net</server>

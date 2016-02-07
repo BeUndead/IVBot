@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 @IVBotCommand(value = "join")
 public final class JoinCommand extends AdminCommandListener {
 
-    private static final String CHANNEL_REGEX = "\\#(?<channel>[^\\s]+)";
+    private static final String CHANNEL_REGEX = "(?<channel>\\#[^\\s]+)";
     private static final Pattern CHANNEL_PATTERN = Pattern.compile(CHANNEL_REGEX);
     private static Matcher CHANNEL_MATCHER;
 
