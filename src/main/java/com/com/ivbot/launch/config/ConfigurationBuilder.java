@@ -43,7 +43,8 @@ public class ConfigurationBuilder {
         Builder builder = new Builder();
         builder.setName(ivBotConfiguration.getBotNick());
         builder.setLogin(ivBotConfiguration.getLogin());
-        builder.setServerHostname(ivBotConfiguration.getMainServer());
+        builder.setNickservPassword(ivBotConfiguration.getBotNickServPassword());
+        builder.addServer(ivBotConfiguration.getMainServer());
         ivBotConfiguration.getAutoJoinChannels().forEach(channel -> builder.addAutoJoinChannel(channel));
         builder.setVersion(ivBotConfiguration.getVersion());
         builder.setAutoReconnect(true);

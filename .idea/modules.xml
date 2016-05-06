@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ircbot.iml" filepath="$PROJECT_DIR$/ircbot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ircbot.iml" filepath="$PROJECT_DIR$/.idea/modules/ircbot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ircbot_generated.iml" filepath="$PROJECT_DIR$/.idea/modules/ircbot_generated.iml" group="ircbot" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ircbot_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ircbot_main.iml" group="ircbot" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ircbot_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ircbot_test.iml" group="ircbot" />
     </modules>
   </component>
 </project>

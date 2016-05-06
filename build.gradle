@@ -2,6 +2,7 @@ group 'com.com'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'application'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -12,17 +13,59 @@ repositories {
 
 configurations {
     driver
+    schemaGeneration
 }
 
 dependencies {
     compile group: 'org.xerial', name: 'sqlite-jdbc', version: '+'
     compile group: 'org.pircbotx', name: 'pircbotx', version: '2.1'
     compile group: 'org.jooq', name: 'jooq', version: '+'
+    compile group: 'org.jooq', name: 'jooq-meta', version: '+'
+    compile group: 'org.jooq', name: 'jooq-codegen', version: '+'
     compile 'commons-logging:commons-logging:1.2'
     compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'
     compile 'commons-beanutils:commons-beanutils:1.9+'
     compile group: 'org.reflections', name: 'reflections', version: '+'
     compile fileTree(dir: 'libs', include: ['*.jar']) // Fixme - When common-configuration2 pushes to maven
+
+    schemaGeneration group: 'org.xerial', name: 'sqlite-jdbc', version: '+'
+    schemaGeneration group: 'org.jooq', name: 'jooq', version: '+'
+    schemaGeneration group: 'org.jooq', name: 'jooq-meta', version: '+'
+    schemaGeneration group: 'org.jooq', name: 'jooq-codegen', version: '+'
+
     testCompile group: 'junit', name: 'junit', version: '+'
     testCompile group: 'org.mockito', name: 'mockito-all', version: '+'
+}
+
+sourceSets {
+    generated {
+        compileClasspath += sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.runtimeClasspath
+    }
+    test {
+        compileClasspath += sourceSets.main.compileClasspath
+        compileClasspath += sourceSets.generated.output
+        runtimeClasspath += sourceSets.main.runtimeClasspath
+        runtimeClasspath += sourceSets.generated.output
+    }
+    main {
+        compileClasspath += sourceSets.generated.output
+        runtimeClasspath += sourceSets.generated.output
+    }
+}
+
+mainClassName = "com.com.ivbot.IVBotApplicationMain"
+
+task generateSchema(type: JavaExec) {
+    classpath configurations.schemaGeneration
+
+    main = "org.jooq.util.GenerationTool"
+
+    args "src/main/resources/generation-config.xml"
+}
+
+compileGeneratedJava.dependsOn generateSchema
+
+clean.doFirst {
+    delete 'src/generated'
 }

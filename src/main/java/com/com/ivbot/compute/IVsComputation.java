@@ -75,6 +75,37 @@ public class IVsComputation {
         return possibleIvsAsLists;
     }
 
+    public static List<Integer>[] getPossibleIVsFromVariablesWithHiddenPowerTypeNew(int[] givenStatValues,
+                                                                                    int[] baseStats,
+                                                                                    int natureId,
+                                                                                    int level,
+                                                                                    int[] evs,
+                                                                                    int hiddenPowerTypeId)
+            throws ComputationAbortedException {
+
+        if (hiddenPowerTypeId == HiddenPowerComputation.NORMAL ||
+            hiddenPowerTypeId == HiddenPowerComputation.FAIRY) {
+
+            List<Integer>[] empty = new List[6];
+            for (int statId = 0; statId < 6; statId++) {
+                empty[statId] = Collections.<Integer>emptyList();
+            }
+            return empty;
+        }
+
+        Set<Integer>[] possibleIVs = new Set[6];
+        for (int statId = 0; statId < 6; statId++) {
+            possibleIVs[statId] = new HashSet<>();
+        }
+
+        int[][] ivRanges = getIVRangesFromVariables(givenStatValues, baseStats, natureId, level, evs);
+
+        HiddenPowerComputation.getHiddenPowerLoopNfor();
+
+        // TODO - neaten IV computation for Hidden Powers...
+        return null;
+    }
+
     /**
      * Computes the possible {@code IV} {@code ranges} for all {@code Stat}s with the given parameters.
      * <p>
@@ -168,5 +199,4 @@ public class IVsComputation {
 
         return range;
     }
-
 }

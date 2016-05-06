@@ -2,13 +2,13 @@
 <configuration>
     <settings>
         <botNick>IVBot</botNick>
-        <nsPassword></nsPassword>
+        <nsPassword>8o7T3r5</nsPassword>
         <version>2.0</version>
         <ownerNick>oCom</ownerNick>
-        <debug>true</debug>
+        <debug>false</debug>
         <login>BotsyDo</login>
         <servers>
-            <server>fluffypony.nl.eu.synirc.net</server>
+            <server>omega.uk.eu.synirc.net</server>
         </servers>
         <channels>
             <debug>

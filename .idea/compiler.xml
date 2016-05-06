@@ -18,5 +18,10 @@
         <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ircbot_generated" target="1.8" />
+      <module name="ircbot_main" target="1.8" />
+      <module name="ircbot_test" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
