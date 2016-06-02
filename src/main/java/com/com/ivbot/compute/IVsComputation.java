@@ -103,6 +103,8 @@ public class IVsComputation {
         HiddenPowerComputation.getHiddenPowerLoopNfor();
 
         // TODO - neaten IV computation for Hidden Powers...
+        // You should only need to calculate odd/even/both once for each IV, and then filter the results to only those
+        // which match.
         return null;
     }
 
@@ -180,19 +182,29 @@ public class IVsComputation {
     private static int[] getIVRangeFromVariables(int givenStatValue, int statId, int baseStat, int natureId, int level,
                                                  int ev) throws ImpossibleStatException {
 
+        // Initialise as two impossible IVs.
         int[] range = new int[] {-1, -1};
+
+        // Check through all values
         for (int iv = 0; iv <= 31; iv++) {
             int statValue = StatComputation.getStatFromVariables(statId, baseStat, natureId, level, iv, ev);
+
             if (statValue == givenStatValue) {
+                // The IV gives the expected stat
                 if (range[MINIMUM] < 0 || range[MINIMUM] > 31) {
+                    // If the minimum has not been set, then set it to this IV
                     range[MINIMUM] = iv;
                 }
+                // Keep updating the maximum until we exit the loop
                 range[MAXIMUM] = iv;
             } else if (statValue > givenStatValue) {
+                // IV gives greater than the expected stat; break the loop.
+                // If neither minimum or maximum have been changed by this point; then the statValue is impossible
                 break;
             }
         }
 
+        // Cannot be obtained with any IV
         if (range[MINIMUM] < 0 || range[MAXIMUM] < 0) {
             throw new ImpossibleStatException(givenStatValue);
         }

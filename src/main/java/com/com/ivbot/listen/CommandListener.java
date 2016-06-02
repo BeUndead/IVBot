@@ -17,11 +17,6 @@ import static com.com.ivbot.listen.util.ListenerUtilities.COMMAND_TRIGGER;
  */
 public abstract class CommandListener extends ListenerAdapter {
 
-//    /**
-//     * {@link Logger} for the {@link CommandListener} {@link Class}.
-//     */
-//    private static final Logger LOG = Logger.getLogger(CommandListener.class);
-
     /**
      * The regex to check message for being a help request.
      */
@@ -34,13 +29,13 @@ public abstract class CommandListener extends ListenerAdapter {
      * If {@code true}, means that the user must explicitly have {@literal " help"} appended to the command name in
      * order to invoke the help response.
      */
-    protected boolean EXPLICIT_HELP = false;
+    private boolean EXPLICIT_HELP = false;
 
     /**
      * The latest {@code Event} received which required handling.  This is occasionally used by subclasses in order to
      * handle additional requirements of their task.  For the most part it is unused however.
      */
-    protected GenericMessageEvent latestEvent;
+    GenericMessageEvent latestEvent;
 
     /**
      * Constructor: creates an extending {@code CommandListener} with the passed {@code commandName} as {@code

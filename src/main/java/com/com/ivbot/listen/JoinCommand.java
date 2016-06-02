@@ -33,7 +33,7 @@ public final class JoinCommand extends AdminCommandListener {
      *
      * @param message The message to respond to.
      *
-     * @return A success or failure response.
+     * @return A success or failure2 response.
      */
     @Override
     protected List<String> getResponse(String message) {

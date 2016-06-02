@@ -75,7 +75,7 @@ public final class IVsCommand extends NonRestrictedCommandListener {
             int[] baseStats = BaseStatsQuery.getBaseStatsFromPokemonId(pokemonId);
 
             try {
-                // If a type is given, assume hidden power is desired
+                // If a type is given, assume hi  dden power is desired
                 Integer hpTypeId = TypeQuery.getTypeIdFromQuery(updatedMessage);
 
                 try {

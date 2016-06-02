@@ -17,7 +17,7 @@ public abstract class LevelledCommandListener extends CommandListener {
     /**
      * The minimum {@code AccessLevel} required for a user to have access to this command.
      */
-    protected final IVBotAccessLevel MINIMUM_ACCESS_LEVEL;
+    final IVBotAccessLevel MINIMUM_ACCESS_LEVEL;
 
     /**
      * Constructor; sets {@code COMMAND_NAME} and {@code MINIMUM_ACCESS_LEVEL}.
